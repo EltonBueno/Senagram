@@ -1,0 +1,74 @@
+<?php
+ require_once('inc/classes.php');
+ $Usuario = new Usuario();
+ $dados = array('nome' => 'JOSE DA SILVA', 'email' => 'jose@teste1.teste', 'senha' => '1234');
+ echo $Usuario->cadastrar($dados);
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENAGRAN</title>
+    <!-- CSS -->
+    <?php
+        require_once('inc/css.php');
+    ?>
+    <!-- /CSS -->
+    <!-- JS -->
+    <?php
+        require_once('inc/js.php'); 
+    ?>
+    <!-- /JS -->
+</head>
+<body>
+    <div class="container">
+        <!-- MENU --> 
+        <?php
+            require_once('inc/menu.php');            
+        ?>             
+        <!-- /MENU -->
+        <!-- CONTEUDO -->
+        <div>
+            <h1> USUÁRIOS </h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Ações</th>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $usuarios = $Usuario->listar();
+                        foreach ($usuarios as $usuario) {
+                            
+                        
+                    ?>
+                    <tr>
+                        <td></td>
+                        <td><?php echo $usuario->id_usuario; ?></td>
+                        <td><?php echo $usuario->nome; ?></td>
+                        <td><?php echo $usuario->email; ?></td>
+                        
+                    </tr>
+                    <?php
+                        } // fecha foreach
+                    ?>
+                </tbody>
+
+            </table>
+        </div>
+        <!-- /CONTEUDO -->
+        <!-- RODAPE -->
+        <?php
+            include_once('inc/rodape.php');
+        ?>
+        <!-- /RODAPE -->    
+    </div>    
+</body>
+</html>
