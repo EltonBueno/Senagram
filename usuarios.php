@@ -34,7 +34,7 @@
         <div>
             <h1> USUÁRIOS 
                 -
-                <a class="btn btn-dark" href="<?php echo URL; ?>/usuario.cadastrar.php">
+                <a class="btn btn-dark" href="<?php echo URL; ?>/usuario_cadastrar.php">
                 <i class="bi bi-person-plus-fill"></i>    
                 Novo
                   
@@ -57,7 +57,7 @@
                         
                     ?>
                     <tr>
-                        <td><a class="btn btn-success" href="<?php echo URL ?>/usuario.atualizar.php?id=<?php echo $usuario->id_usuario ?>"><i class="bi bi-pencil-square"></i>Editar</a></td>
+                        <td><a class="btn btn-success" href="<?php echo URL ?>/usuario_atualizar.php?id=<?php echo $usuario->id_usuario ?>"><i class="bi bi-pencil-square"></i>Editar</a></td>
                         <td><?php echo $usuario->id_usuario; ?></td>
                         <td><?php echo $usuario->nome; ?></td>
                         <td><?php echo $usuario->email; ?></td>
