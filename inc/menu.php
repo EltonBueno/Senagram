@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="postagem.php">
+                    <a class="nav-link" href="postagens.php">
                     <i class="bi bi-chat-dots-fill"></i>
                         Postagens
                     </a>

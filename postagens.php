@@ -1,8 +1,7 @@
 <?php
  require_once('inc/classes.php');
- $Usuario = new Usuario();
- $dados = array('nome' => 'JOSE DA SILVA', 'email' => 'jose@teste11.teste', 'senha' => '1234');
-//  echo $Usuario->cadastrar($dados);
+ $Postagem = new Postagem();
+
 ?>
 
 <!DOCTYPE html>
@@ -32,11 +31,11 @@
         <!-- /MENU -->
         <!-- CONTEUDO -->
         <div>
-            <h1> USUÁRIOS 
+            <h1> POSTAGENS 
                 -
-                <a class="btn btn-dark" href="<?php echo URL; ?>/usuario_cadastrar.php">
+                <a class="btn btn-dark" href="<?php echo URL; ?>/postagem_cadastrar.php">
                 <i class="bi bi-person-plus-fill"></i>    
-                Novo
+                Nova Postagem
                   
                 </a>
             </h1>
@@ -45,24 +44,31 @@
                     <tr>
                         <th>Ações</th>
                         <th>ID</th>
-                        <th>Nome</th>
-                        <th>E-mail</th>
+                        <th>Usuário</th>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Gostei</th>
+                        <th>Não Gostei</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        $usuarios = $Usuario->listar();
-                        foreach ($usuarios as $usuario) {
+                        $postagens = $Postagem->listar();
+                        foreach ($postagens as $postagem) {
                             
                         
                     ?>
                     <tr>
-                        <td><a class="btn btn-success" href="<?php echo URL ?>/usuario_atualizar.php?id=<?php echo $usuario->id_usuario ?>"><i class="bi bi-pencil-square"></i>Editar</a>
+                        <td><a class="btn btn-success" href="<?php echo URL ?>/postagem_atualizar.php?id=<?php echo $postagem->id_postagem ?>"><i class="bi bi-pencil-square"></i>Editar</a>
                         <br>
-                        <a class="btn btn-danger mt-1" href="<?php echo URL ?>/usuario_deletar.php?id=<?php echo $usuario->id_usuario ?>"><i class="bi bi-trash"></i>Deletar</a></td>
-                        <td><?php echo $usuario->id_usuario; ?></td>
-                        <td><?php echo $usuario->nome; ?></td>
-                        <td><?php echo $usuario->email; ?></td>
+                        <a class="btn btn-danger mt-1" href="<?php echo URL ?>/postagem_deletar.php?id=<?php echo $postagem->id_postagem ?>"><i class="bi bi-trash"></i>Deletar</a></td>
+                        <td><?php echo $postagem->id_postagem; ?></td>
+                        <td><?php echo $postagem->id_usuario; ?></td>
+                        <td><?php echo $postagem->dt; ?></td>
+                        <td><?php echo nl2br($postagem->descricao); ?></td>
+                        <td><?php echo $postagem->gostei; ?></td>
+                        <td><?php echo $postagem->naogostei; ?></td>
                         
                     </tr>
                     <?php
