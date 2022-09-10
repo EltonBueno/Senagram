@@ -24,9 +24,25 @@
     
         }
     
-        public function cadastrar(Array $dados = null)
+        public function cadastrar(Array $dados = null, $foto)
         {
-            $sql = $this->pdo->prepare("INSERT INTO postagens (id_usuario,descricao,dt) VALUES (:id_usuario, :descricao, :dt)");
+
+              
+            // $extensao = end(explode('.', $foto['name']));
+            $novoNome = rand(1,100000).date('dmYHis').'.'.end(explode('.', $foto['name']));     
+            $ok = move_uploaded_file($foto['tmp_name'],'./imagens/'.$novoNome);
+            
+            if ($ok ) 
+            {    
+                $imagem = $novoNome;   
+            }
+            else
+            {
+                $imagem = null;
+            }
+
+           
+            $sql = $this->pdo->prepare("INSERT INTO postagens (id_usuario,descricao,dt,foto) VALUES (:id_usuario, :descricao, :dt, :foto)");
         
             // tratar os dados
             $id_usuario = $dados['id_usuario'];
@@ -37,6 +53,7 @@
             $sql->bindParam(':id_usuario',$id_usuario);
             $sql->bindParam(':descricao',$descricao);
             $sql->bindParam(':dt',$dt);
+            $sql->bindParam(':foto',$imagem);
     
             //executar
             $sql->execute();
@@ -48,11 +65,31 @@
         * 
         * 
         */
-        public function atualizar(array $dados)
+        public function atualizar(array $dados, $foto )
         {
+            if($foto['name'] != '')
+            {
+                $novoNome = rand(1,100000).date('dmYHis').'.'.end(explode('.', $foto['name']));     
+                $ok = move_uploaded_file($foto['tmp_name'],'./imagens/'.$novoNome);
+            
+                 if ($ok) 
+                     $imagem = $novoNome;   
+
+                else
+                    $imagem = $dados['foto_atual'];
+                
+            }
+            else
+                {
+                    $imagem = $dados['foto_atual'];
+                }
+            
+            
+
             $sql = $this->pdo->prepare("UPDATE  postagens SET 
                                             descricao = :descricao,
-                                            dt = :dt 
+                                            dt = :dt,
+                                            foto = :foto 
                                         WHERE 
                                             id_postagem = :id_postagem
                                         LIMIT 1"
@@ -65,7 +102,8 @@
             // mesclar os dados
             $sql->bindParam(':descricao',$descricao);
             $sql->bindParam(':dt',$dt);
-            $sql->bindParam(':id_usuario',$dados['id_usuario']);
+            $sql->bindParam(':id_postagem',$dados['id_postagem']);
+            $sql->bindParam(':foto', $imagem);
     
             //executar
             $sql->execute();

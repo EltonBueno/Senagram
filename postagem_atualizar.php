@@ -1,11 +1,13 @@
 <?php
     require_once('inc/classes.php');
+    $Postagem = new Postagem();
 
-    if(isset($_POST['btnCadastrar'])){
-       $Postagem = new Postagem();
-       $Postagem->cadastrar($_POST,$_FILES['foto']);
+    if(isset($_POST['btnAtualizar'])){
+       $Postagem->atualizar($_POST,$_FILES['foto']);
        header('location:'.URL.'/postagens.php');     
     }
+
+    $post = $Postagem->mostrar($_GET['id']);
 ?>
 
 <!DOCTYPE html>
@@ -35,21 +37,23 @@
         <!-- /MENU -->
         <!-- CONTEUDO -->
         <div>
-            <h1> CADASTRAR POSTAGEM </h1>
+            <h1> ATUALIZAR POSTAGEM </h1>
             <form action="?" method="POST" enctype="multipart/form-data">
                 <!-- CAMPO OCULTO -->
                 <input type="hidden" name="id_usuario" value="6">
+                <input type="hidden" name="id_postagem" value="<?php echo $post->id_postagem; ?>">
+                <input type="hidden" name="foto_atual" value="<?php echo $post->foto; ?>">
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="form-label" for="descricao" >Descrição</label>
-                    <textarea class="form-control" name="descricao" id="descricao" cols="30" rows="10" required></textarea>
+                    <textarea class="form-control" name="descricao" id="descricao" cols="30" rows="5" required><?php echo $post->descricao; ?></textarea>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="form-label" for="foto" >Foto</label>
                         <input class="form-control" type="File" name="foto" id="foto" >
                     </div>
                     <div class="offset-11 col-md-2 mt-3">
-                        <input class="btn btn-success" type="submit"  name="btnCadastrar" value="Cadastrar">
+                        <input class="btn btn-success" type="submit"  name="btnAtualizar" value="Atualizar">
                     </div>
                 </div>
             </form>

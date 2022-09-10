@@ -43,6 +43,7 @@
                 <thead>
                     <tr>
                         <th>Ações</th>
+                        <th>Foto</th>
                         <th>ID</th>
                         <th>Usuário</th>
                         <th>Data</th>
@@ -63,6 +64,12 @@
                         <td><a class="btn btn-success" href="<?php echo URL ?>/postagem_atualizar.php?id=<?php echo $postagem->id_postagem ?>"><i class="bi bi-pencil-square"></i>Editar</a>
                         <br>
                         <a class="btn btn-danger mt-1" href="<?php echo URL ?>/postagem_deletar.php?id=<?php echo $postagem->id_postagem ?>"><i class="bi bi-trash"></i>Deletar</a></td>
+                        <td>
+                        <?php     
+                        if($postagem->foto != '')
+                        { echo '<img class="img-thumbnail" src="'.URL.'imagens/'.$postagem->foto.'" width="50%">';}    
+                        ?>
+                        </td>
                         <td><?php echo $postagem->id_postagem; ?></td>
                         <td><?php echo $postagem->id_usuario; ?></td>
                         <td><?php echo $postagem->dt; ?></td>
